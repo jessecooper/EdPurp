@@ -1,0 +1,15 @@
+extends layout
+
+block content
+ h1= title
+ p Welcome to #{title}
+ div
+  forum(action='/login1.php', method='POST', id='loginforum')
+   div
+    label(for='username') Username:
+     input(type='input', name='username')
+   div
+    label(for='password') Password:
+     input(type='password', name='password')
+   div
+    input(type='submit', value='Log In')
