@@ -16,8 +16,7 @@ module.exports = function(passport){
                     if (err){
                         console.log('Error in SignUp: '+err);
                         return done(err);
-                    }
-                    // already exists
+                    }// already exists
                     if (user) {
                         console.log('User already exists with username: '+username);
                         return done(null, false, req.flash('message','User Already Exists'));
@@ -29,9 +28,10 @@ module.exports = function(passport){
                         // set the user's local credentials
                         newUser.username = username;
                         newUser.password = createHash(password);
-                        newUser.email = req.param('email');
-                        newUser.firstName = req.param('firstName');
-                        newUser.lastName = req.param('lastName');
+                        newUser.admin = req.param('isAdmin');
+                        //newUser.email = req.param('email');
+                        //newUser.firstName = req.param('firstName');
+                        //newUser.lastName = req.param('lastName');
 
                         // save the user
                         newUser.save(function(err) {

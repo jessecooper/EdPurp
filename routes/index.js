@@ -11,6 +11,7 @@ var isAuthenticated = function (req, res, next) {
 	res.redirect('/');
 }
 
+
 module.exports = function(passport){
 
 	/* GET login page. */
@@ -25,9 +26,9 @@ module.exports = function(passport){
 		failureRedirect: '/',
 		failureFlash : true  
 	}));
-
+	// TODO - check req.user.admin to see if page should be displayed.
 	/* GET Registration Page */
-	router.get('/signup', function(req, res){
+	router.get('/signup', isAuthenticated, function(req, res){
 		res.render('register',{message: req.flash('message')});
 	});
 

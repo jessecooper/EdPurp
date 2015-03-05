@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+.container {
+	padding-left: 15%;
+	height: 50%;
+	width: 60%;
+	vertical-align: center;
+	background: #BFCACA;
+	box-shadow: 5px 5px 5px #888888;
+}
+.text-center.login-title {
+	text-align: center;
+}
+.title {
+	text-align: center;
+}
