@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  include menu.jade
   div.container
     div
       div
@@ -10,4 +11,3 @@ block content
           ul
            li Username ---> #{user.username}
            li Is Admin ---> #{user.admin}
-          a(href='/signout', class='text-center new-account') Sign Out

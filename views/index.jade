@@ -1,19 +1,16 @@
 extends layout
 block content
   div.container
-      div
-        h1.text-center.login-title Sign in to EdPurp
           div
-            img(class='profile-img', src='https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120')
             form(class='form-signin', action='/login', method='POST')
-              div
-               input(type='text', name='username' class='form-control', placeholder='Email',required, autofocus)
-              div
-               input(type='password', name='password' class='form-control', placeholder='Password', required)
-              div 
-               button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
+              img(class='profile-img', src='https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120')
+              //h2.form-signin-heading EdPurp Sign In
+              label(for='username', 'class="sr-only')
+              input(type='text', name='username' class='form-control', placeholder='User Name',required, autofocus)
+              label(for='password' class='sr-only')
+              input(type='password', name='password' class='form-control', placeholder='Password', required)
+              button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
               span.clearfix
-          //a(href='/signup', class='text-center new-account') Create an account
           #message
           if message
             h1.text-center.error-message #{message}

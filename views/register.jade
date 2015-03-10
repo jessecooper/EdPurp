@@ -1,20 +1,23 @@
+// TODO - Add function to check if password comf match
 extends layout
 block content
+ include menu.jade
  div.container
-   div.row
-     div.col-sm-6.col-md-4.col-md-offset-4
-       h1.text-center.login-title Registration Details
-         div.signup-wall
+   div
+     div
+        div
            form(class='form-signin', action='/signup', method='POST')
-             div
-              input(type='text', name='username', class='form-control', placeholder='Username',required, autofocus)
-             div				
-              input(type='password', name='password', class='form-control nomargin', placeholder='Password', required)
-             div
-              label(for='isAdmin') Admin:
-              input(type='checkbox', name='isAdmin', class='form-control nomargin', placeholder='Admin', value='true') 
-             div				
-              button(class='btn btn-lg btn-primary btn-block', type='submit') Register
+             h3 Register New User:
+             label(for="username" class="sr-only") User Name
+             input(type='text', name='username', class='form-control', placeholder='Username',required, autofocus)
+             label(for="password" class="sr-only") Password
+             input(type='password', name='password', class='form-control nomargin', placeholder='Password', required)
+             label(for="password_comf" class="sr-only") Retype Password
+             input(type='password', name='password_comf', class='form-control nomargin', placeholder='Retype Password', required)
+             label(for='checkbox')
+              input(type='checkbox', name='isAdmin', class='form-control', value='true')
+              | Admin?
+             button(class='btn btn-lg btn-primary btn-block', type='submit') Register
              span.clearfix
              #message
              if message

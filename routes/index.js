@@ -29,12 +29,12 @@ module.exports = function(passport){
 	// TODO - check req.user.admin to see if page should be displayed.
 	/* GET Registration Page */
 	router.get('/signup', isAuthenticated, function(req, res){
-		res.render('register',{message: req.flash('message')});
+		res.render('register',{user: req.user, message: req.flash('message')});
 	});
 
 	/* Handle Registration POST */
 	router.post('/signup', passport.authenticate('signup', {
-		successRedirect: '/home',
+		successRedirect: '/signup',
 		failureRedirect: '/signup',
 		failureFlash : true  
 	}));
@@ -42,6 +42,11 @@ module.exports = function(passport){
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
 		res.render('home', { user: req.user });
+	});
+
+	/* GET Upload Page */
+	router.get('/upload', isAuthenticated, function(req, res){
+		res.render('upload', { user: req.user });
 	});
 
 	/* Handle Logout */

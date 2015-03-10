@@ -20,18 +20,20 @@ module.exports = function(passport){
                     if (user) {
                         console.log('User already exists with username: '+username);
                         return done(null, false, req.flash('message','User Already Exists'));
+                    }else if (req.param('password') != req.param('password_comf')){
+                        console.log('Password and password_comf did not match');
+                        return done(null, false, req.flash('message','Password did not match'));
+                        // TODO - add function to test password strength with test case
                     } else {
-                        // if there is no user with that email
+                        // if there is no user
                         // create the user
                         var newUser = new User();
 
                         // set the user's local credentials
                         newUser.username = username;
+                        // TODO - Add password comf check
                         newUser.password = createHash(password);
                         newUser.admin = req.param('isAdmin');
-                        //newUser.email = req.param('email');
-                        //newUser.firstName = req.param('firstName');
-                        //newUser.lastName = req.param('lastName');
 
                         // save the user
                         newUser.save(function(err) {
@@ -40,7 +42,8 @@ module.exports = function(passport){
                                 throw err;  
                             }
                             console.log('User Registration succesful');    
-                            return done(null, newUser);
+                            //return done(null, newUser);
+                            return done(null, false, req.flash('message','User Created Succesfully'));
                         });
                     }
                 });
@@ -55,5 +58,6 @@ module.exports = function(passport){
     var createHash = function(password){
         return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
     }
+    //function(password)
 
 }

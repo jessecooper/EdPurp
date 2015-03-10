@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  include menu.jade
+  div.container
+   div
+    div
+     div
+      form(class='form-signin', action='/upload', method='POST')
+       label(for='torrent') Torrent File:
+       input(type='file', name='torrent', class='form-control', required, accept='.torrent')				
+       label(for='title', class='sr-only') Title:
+       input(type='text', name='title', class='form-control nomargin', placeholder='Title', required)				
+       button(class='btn btn-lg btn-primary btn-block', type='submit') Upload
+       span.clearfix
+       #message
+       if message
+        h1.text-center.error-message #{message}
