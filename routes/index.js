@@ -3,7 +3,9 @@ var router = express.Router();
 var uploader = require('../modules/upload')
 //var books = require('../modules/books')
 // Mongoose models
-var Book_q = require('../models/book');
+//var Book_q = require('../models/book');
+var Torrent_q = require('../models/torrent');
+
 // Inspect objects
 var util = require('util')
 
@@ -48,9 +50,9 @@ module.exports = function(passport){
 	/* GET Home Page */
 	// TODO: Query homepage results
 	router.get('/home', isAuthenticated, function(req, res){
-		Book_q.find({}, function (err, books) {
+		Torrent_q.find({}, function (err, torrent) {
     		if (!err) {
-      			res.render('home', { user: req.user, books: books });
+      			res.render('home', { user: req.user, torrent: torrent });
     		}else{
       			console.log(err);
     		}
