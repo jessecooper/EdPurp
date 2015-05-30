@@ -4,11 +4,6 @@ It is currently not very functional.
 Updates:
 Current Scema change to be more generic with torrent uploads. 
 
-+ ---------------------------------------------------------------------------- +
-| TODOS @ Saturday 30 May 2015 14:54                                           |
-| 7 files scanned                                                              |
-+ ---------------------------------------------------------------------------- +
-
 ## TODO (6)
 1. app.js:52  Enable secure cookies for https
 2. index.js:35  check req.user.admin to see if page should be displayed.
