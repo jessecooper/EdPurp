@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+// File Upload 
+var multer  = require('multer');
+
 // Mongo
 var dbConfig = require('./db.js');
 var mongoose = require('mongoose');
@@ -18,6 +21,22 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// Init Multer
+app.use(multer({ 
+    dest: './uploads/',
+    putSingleFilesInArray: true,
+    rename: function (fieldname, filename) {
+        return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+    },
+    onFileUploadStart: function (file) {
+        console.log(file.originalname + ' is starting ...')
+    },
+    onFileUploadComplete: function (file) {
+        console.log(file.fieldname + ' uploaded to  ' + file.path)
+        //done=true;
+    }
+}))
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -30,8 +49,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Passport setup
 var passport = require('passport');
 var session = require('express-session');
-// TODO - Why Do we need this key ?
-app.use(session({secret: 'dklafjeiohiase'}));
+// TODO: Enable secure cookies for https
+app.use(session({
+	secret: 'dklafjeiohiase',
+	resave: false,
+	saveUninitialized: false,
+	//cookie: { secure: true }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -43,6 +67,7 @@ app.use(flash());
 // Initialize Passport
 var initPassport = require('./passport/init');
 initPassport(passport);
+
 
 var routes = require('./routes/index')(passport);
 

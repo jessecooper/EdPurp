@@ -10,12 +10,12 @@ nav(class="navbar navbar-inverse navbar-fixed-top")
         div(id="navbar" class="collapse navbar-collapse")
           ul(class="nav navbar-nav")
             li(class="active")
-              a(href="/home") Home
+              a(id="home" href="/home") Home
             li
-              a(href="/upload") Upload
+              a(id="upload" href="/upload") Upload
             if user.admin
              li
-              a(href="/signup") Admin
+              a(id="admin" href="/signup") Admin
           ul(class="nav navbar-nav navbar-right")
             li
               p Hello #{user.username}

@@ -5,9 +5,19 @@ block content
   div.container
     div
       div
-       #user
-        h1.text-center.login-title Welcome #{user.firstName}. Check your details below:
+        h1.text-center.login-title Welcome:
          div
-          ul
-           li Username ---> #{user.username}
-           li Is Admin ---> #{user.admin}
+          table(class="table")
+           tr
+            th Title:
+            th ISBN:
+            th Uploaded:
+            th Download:
+           each book in books
+            tr
+             td 
+              a(href='\item=#{book.id}') #{book.title} 
+             td #{book.isbn}
+             td #{book.date}
+             td 
+              a(href='#{book.file_path}') download

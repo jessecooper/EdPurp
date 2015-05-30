@@ -1,5 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var uploader = require('../modules/upload')
+//var books = require('../modules/books')
+// Mongoose models
+var Book_q = require('../models/book');
+// Inspect objects
+var util = require('util')
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -26,7 +32,7 @@ module.exports = function(passport){
 		failureRedirect: '/',
 		failureFlash : true  
 	}));
-	// TODO - check req.user.admin to see if page should be displayed.
+	// TODO: check req.user.admin to see if page should be displayed.
 	/* GET Registration Page */
 	router.get('/signup', isAuthenticated, function(req, res){
 		res.render('register',{user: req.user, message: req.flash('message')});
@@ -40,14 +46,31 @@ module.exports = function(passport){
 	}));
 
 	/* GET Home Page */
+	// TODO: Query homepage results
 	router.get('/home', isAuthenticated, function(req, res){
-		res.render('home', { user: req.user });
+		Book_q.find({}, function (err, books) {
+    		if (!err) {
+      			res.render('home', { user: req.user, books: books });
+    		}else{
+      			console.log(err);
+    		}
+  		});
+		//res.render('home', { user: req.user, books: books.books });
 	});
 
 	/* GET Upload Page */
 	router.get('/upload', isAuthenticated, function(req, res){
-		res.render('upload', { user: req.user });
+		res.render('upload', { user: req.user, message: req.flash('message') });
 	});
+	
+	// Post upload
+	router.post('/upload', isAuthenticated, function(req,res){
+  		//if(done==true){
+    		//console.log(req.files);
+    		uploader.upload(req);
+    		res.render('upload', { user: req.user, message: "File Uploaded" });
+    	//}
+    }); 
 
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {
