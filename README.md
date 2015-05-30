@@ -17,3 +17,8 @@ Current Scema change to be more generic with torrent uploads.
 5. upload.js:31  express deprecated req.param(name): Use req.params, req.body, or req.query instead
 6. upload.jade:19  Use Angular to make the form selection dynamic
 ...
+
+Run Site:
+sh debug.sh
+http://localhost:3000/
+(mongo db connection will need to be enabled and configured with a user)
