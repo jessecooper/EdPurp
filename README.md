@@ -18,8 +18,10 @@ Current Scema change to be more generic with torrent uploads.
 2. cd ~/EdPurp
 3. npm install 
 4. Edit db.js: MongoDB connection string.
-5. mongoimport --db [dbname] --collection users --file admin.json
+5. mongoimport --db [dbname] --collection users --file epadmin.json
+6. rm ./epadmin.json
 
 ## Run Site
 * sh debug.sh
 * http://localhost:3000/
+* Login: epadmin Password: EpAdmin
