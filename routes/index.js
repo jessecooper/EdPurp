@@ -74,6 +74,13 @@ module.exports = function(passport){
     	//}
     }); 
 
+    router.get('/:file(*)', isAuthenticated, function(req, res, next){
+  		var file = req.params.file
+    		, path = file;
+
+  		res.download(path);
+	});
+
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {
 		req.logout();

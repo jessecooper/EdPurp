@@ -24,7 +24,7 @@ app.set('view engine', 'jade');
 
 // Init Multer
 app.use(multer({ 
-    dest: './uploads/',
+    dest: './public/uploads/',
     putSingleFilesInArray: true,
     rename: function (fieldname, filename) {
         return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()

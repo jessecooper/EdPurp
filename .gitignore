@@ -1,0 +1,4 @@
+admin.json
+/uploads/*.torrent
+/public/uploads/*.torrent
+install.sh
