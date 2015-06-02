@@ -11,13 +11,15 @@ Current Scema change to be more generic with torrent uploads.
 4. upload.js:7  express deprecated req.param(name): Use req.params, req.body, or req.query instead
 5. upload.js:31  express deprecated req.param(name): Use req.params, req.body, or req.query instead
 6. upload.jade:19  Use Angular to make the form selection dynamic
-...
-## Install
+7. Enable a user to edit their profile (Change password)
 
-cd ./EdPurp
-npm install 
+## Install
+1. git clone https://github.com/jessecooper/EdPurp
+2. cd ~/EdPurp
+3. npm install 
+4. Edit db.js: MongoDB connection string.
+5. mongoimport --db [dbname] --collection users --file admin.json
 
 ## Run Site
-sh debug.sh
-http://localhost:3000/
-(mongo db connection will need to be enabled and configured with a user)
+* sh debug.sh
+* http://localhost:3000/

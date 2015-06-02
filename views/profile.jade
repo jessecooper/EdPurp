@@ -1,0 +1,19 @@
+// TODO - Add function to check if password comf match
+extends layout
+block content
+ include menu.jade
+ div.container
+   div
+     div
+        div
+           form(class='form-signin', action='/profile', method='POST')
+             h3 Register Change Password:
+             label(for="password" class="sr-only") Password
+             input(type='password', name='password', class='form-control nomargin', placeholder='Password', required)
+             label(for="password_comf" class="sr-only") Retype Password
+             input(type='password', name='password_comf', class='form-control nomargin', placeholder='Retype Password', required)
+             button(class='btn btn-lg btn-primary btn-block', type='submit') Save
+             span.clearfix
+             #message
+             if message
+                h1.text-center.error-message #{message}

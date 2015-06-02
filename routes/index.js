@@ -22,32 +22,46 @@ var isAuthenticated = function (req, res, next) {
 
 module.exports = function(passport){
 
-	/* GET login page. */
+	// GET login page
 	router.get('/', function(req, res) {
     	// Display the Login page with any flash message, if any
 		res.render('index', { message: req.flash('message') });
 	});
 
-	/* Handle Login POST */
+	// Handle Login POST 
 	router.post('/login', passport.authenticate('login', {
 		successRedirect: '/home',
 		failureRedirect: '/',
 		failureFlash : true  
 	}));
 	// TODO: check req.user.admin to see if page should be displayed.
-	/* GET Registration Page */
+	// GET Registration Page 
 	router.get('/signup', isAuthenticated, function(req, res){
 		res.render('register',{user: req.user, message: req.flash('message')});
 	});
 
-	/* Handle Registration POST */
+	// Handle Registration POST 
 	router.post('/signup', passport.authenticate('signup', {
 		successRedirect: '/signup',
 		failureRedirect: '/signup',
 		failureFlash : true  
 	}));
+	
+	/* Profile */
+	// GET Profile
+        router.get('/profile', isAuthenticated, function(req, res){
+                res.render('profile',{user: req.user, message: req.flash('message')});
+        });
 
-	/* GET Home Page */
+	// POST Profile
+	// TODO Handle profile change post req
+	router.post('/profile', passport.authenticate('profile', {
+                successRedirect: '/profile',
+                failureRedirect: '/profile',
+                failureFlash : true
+        }));
+
+	// GET Home Page 
 	// TODO: Query homepage results
 	router.get('/home', isAuthenticated, function(req, res){
 		Torrent_q.find({}, function (err, torrent) {
@@ -60,7 +74,8 @@ module.exports = function(passport){
 		//res.render('home', { user: req.user, books: books.books });
 	});
 
-	/* GET Upload Page */
+	/* Torrent Handler */
+	// GET Upload Page
 	router.get('/upload', isAuthenticated, function(req, res){
 		res.render('upload', { user: req.user, message: req.flash('message') });
 	});
@@ -72,20 +87,21 @@ module.exports = function(passport){
     		uploader.upload(req);
     		res.render('upload', { user: req.user, message: "File Uploaded" });
     	//}
-    }); 
+    	}); 
+	
+	// Handle Logout 
+        router.get('/signout', function(req, res) {
+                req.logout();
+                res.redirect('/');
+        });
 
-    router.get('/:file(*)', isAuthenticated, function(req, res, next){
+	// Download torrent handler
+    	router.get('/:file(*)', isAuthenticated, function(req, res, next){
   		var file = req.params.file
     		, path = file;
 
   		res.download(path);
 	});
-
-	/* Handle Logout */
-	router.get('/signout', function(req, res) {
-		req.logout();
-		res.redirect('/');
-	});
-
+	
 	return router;
 }

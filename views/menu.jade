@@ -18,7 +18,8 @@ nav(class="navbar navbar-inverse navbar-fixed-top")
               a(id="admin" href="/signup") Admin
           ul(class="nav navbar-nav navbar-right")
             li
-              p Hello #{user.username}
+              p Hello 
+                a(id="profile" href="/profile") #{user.username}
             li
               a(href='/signout') Sign Out
           form(class="navbar-form navbar-right")
