@@ -3,11 +3,14 @@ var router = express.Router();
 var uploader = require('../modules/upload')
 //var books = require('../modules/books')
 // Mongoose models
-//var Book_q = require('../models/book');
+var uPassword_c = require('../models/user');
 var Torrent_q = require('../models/torrent');
 
 // Inspect objects
 var util = require('util')
+
+//Needed for password reset
+var bCrypt = require('bcrypt-nodejs');
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -54,12 +57,28 @@ module.exports = function(passport){
         });
 
 	// POST Profile
-	// TODO Handle profile change post req
-	router.post('/profile', passport.authenticate('profile', {
-                successRedirect: '/profile',
-                failureRedirect: '/profile',
-                failureFlash : true
-        }));
+	// TODO move password reset code some code to a module
+	router.post('/profile', isAuthenticated, function(req, res){
+		if (req.param('password') != req.param('password_comf')){
+                        console.log('Password and password_comf did not match');
+                        // TODO - add function to test password strength with test case
+			res.render('profile',{user: req.user, message: 'Passwords did not match'});
+		} else {
+			
+			console.log('user: ' + req.user);
+			uPassword_c.update( { username: req.user.username}, {$set: { password: createHash(req.param('password')) }}, { multi: 'false' }, function(err,update) {
+				if( err || !update ){
+					res.render('profile',{user: req.user, message: 'Password Change error'});
+					console.log('Error: ' + err + ' ' + update);
+				}else{
+					res.render('profile',{user: req.user, message: 'Password Changed'});
+				}
+			});
+		}
+        });
+	var createHash = function(password){
+                        return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+        }
 
 	// GET Home Page 
 	// TODO: Query homepage results
@@ -71,7 +90,6 @@ module.exports = function(passport){
       			console.log(err);
     		}
   		});
-		//res.render('home', { user: req.user, books: books.books });
 	});
 
 	/* Torrent Handler */

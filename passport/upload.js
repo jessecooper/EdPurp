@@ -1,3 +1,4 @@
+/* Marked for removal */
 var LocalStrategy   = require('passport-local').Strategy;
 var Book = require('../models/book');
 // TODO - Add models
