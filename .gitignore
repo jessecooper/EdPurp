@@ -1,4 +1,5 @@
 admin.json
-/uploads/*.torrent
+*.torrent
 /public/uploads/*.torrent
 install.sh
+/node_modules
