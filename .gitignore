@@ -1,5 +1,3 @@
-admin.json
 *.torrent
-/public/uploads/*.torrent
 install.sh
-/node_modules
+node_modules/*
