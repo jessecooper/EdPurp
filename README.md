@@ -11,7 +11,6 @@ Current Scema change to be more generic with torrent uploads.
 4. upload.js:7  express deprecated req.param(name): Use req.params, req.body, or req.query instead
 5. upload.js:31  express deprecated req.param(name): Use req.params, req.body, or req.query instead
 6. upload.jade:19  Use Angular to make the form selection dynamic
-7. Enable a user to edit their profile (Change password)
 
 ## Install
 1. git clone https://github.com/jessecooper/EdPurp
