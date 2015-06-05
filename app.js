@@ -49,12 +49,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Passport setup
 var passport = require('passport');
 var session = require('express-session');
-// TODO: Enable secure cookies for https
 app.use(session({
 	secret: 'dklafjeiohiase',
 	resave: false,
 	saveUninitialized: false,
-	//cookie: { secure: true }
+	cookie: { secure: true }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
