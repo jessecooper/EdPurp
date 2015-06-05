@@ -1,5 +1,5 @@
 EdPurp is a nodejs/mongodb project for hosting a private torrent site. 
-It is currently not very functional. 
+It is currently not ready for production. 
 
 Updates:
 Current Scema change to be more generic with torrent uploads. 
@@ -15,12 +15,12 @@ Current Scema change to be more generic with torrent uploads.
 ## Install
 1. git clone https://github.com/jessecooper/EdPurp
 2. cd ~/EdPurp
-3. npm install 
+3. sh install.sh 
 4. Edit db.js: MongoDB connection string.
 5. mongoimport --db [dbname] --collection users --file epadmin.json
-6. rm ./epadmin.json
+6. rm ./epadmin.json (if running in production)
 
 ## Run Site
-* sh debug.sh
+* Dev: sh debug.sh Prod:./bin/www
 * http://localhost:3000/
 * Login: epadmin Password: EpAdmin
