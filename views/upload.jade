@@ -1,39 +1,64 @@
-extends layout
+doctype html
+html
+ head  
+    // meta tags
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    // title= title
+    title EdPurp
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    // Bootstrap core CSS *need to change directory*
+    link(href="/stylesheets/bootstrap.min.css" rel="stylesheet")
 
-block content
+    // Custom styles for this template
+    //link(href="signin.css" rel="stylesheet")
+
+    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    //[if lt IE 9]
+      script(src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js")
+      script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")
+    //[endif]
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-sanitize.js")
+    script(src="/javascripts/uploadForm.js")
+ body(ng-app="radioForm")
+  block content 
   include menu.jade
   div.container
    div
     div
      br
      div(class="col-md-8 col-md-offset-3")
-      form(class='form-horizontal', action='/upload', enctype="multipart/form-data", method='POST')
+      form(class='form-horizontal', ng-controller="tSelection", action='/upload', enctype="multipart/form-data", method='POST')
        div(class='form-group')
         label(for='torrent' class='col-md-2 control-label') Torrent File:
         div(class='col-md-6')
          input(type='file', name='torrent', class='form-control', required, accept='.torrent')
        div(class='form-group')
          label(for='book', class="col-md-2 control-label radio-inline")
-          input(type="radio" name="book" checked="checked") 
+          input(type="radio" name="book" value="book" ng-model="checked" ng-click="formHandle($event)") 
           | Book
-         // TODO: Use Angular to make the form selection dynamic
          label(for='movie', class="col-md-1 control-label radio-inline")
-          input(type="radio" name="movie") 
+          input(type="radio" name="movie" value="movie" ng-model="checked" ng-click="formHandle($event)") 
           | Movie
+         label(for='music', class="col-md-1 control-label radio-inline")
+          input(type="radio" name="music" value="music" ng-model="checked" ng-click="formHandle($event)") 
+          | Music
          label(for='app', class="col-md-1 control-label radio-inline")
-          input(type="radio" name="app") 
+          input(type="radio" name="app" value="app" ng-model="checked" ng-click="formHandle($event)") 
           | App
          label(for='game', class="col-md-1 control-label radio-inline")
-          input(type="radio" name="game") 
+          input(type="radio" name="game" value="game" ng-model="checked" ng-click="formHandle($event)") 
           | Game
        div(class='form-group')
         label(for='title', class='col-sm-2 control-label') Title:
         div(class='col-md-4')
          input(type='text', name='title', class='form-control nomargin', placeholder='Title', required)
-       div(class='form-group')
+       div(class='form-group' ng-show="isbnVar")
         label(for='ISBN', class='col-sm-2 control-label') ISBN:
         div(class='col-md-4')
-         input(type='text', name='isbn', class='form-control nomargin', placeholder='ISBN', required)
+         input(type='text', name='isbn', ng-model="isbn", class='form-control nomargin', placeholder='ISBN')
        div(class='form-group')
         label(for='description', class='col-sm-2 control-label') Description:
         div(class='col-md-6')

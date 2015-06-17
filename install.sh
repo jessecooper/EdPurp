@@ -7,9 +7,12 @@
 #Functions
 test_packages()
 {
-	if [ -f /usr/bin/npm ]
+	if [ -f /usr/bin/npm || -f /usr/local/bin/npm ]
 	then
 		echo 'NPM ........... Pass'
+	else	
+		echo 'NPM ........... Not Found'
+		exit 1
 	fi
 }
 test_folders()
