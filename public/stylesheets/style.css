@@ -41,3 +41,6 @@ body {
 .profile-img {
 	padding-left: 25%;
 }
+.navbar-fixed-top {
+  border: 0;
+}

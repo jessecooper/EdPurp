@@ -91,7 +91,17 @@ module.exports = function(passport){
     		}
   		});
 	});
-
+	/* GET Search */
+	// GET Search
+	router.get('/search', isAuthenticated, function(req, res){
+                Torrent_q.find({}, function (err, searchr) {
+                if (!err) {
+                        res.render('search', { user: req.user, searchr: searchr });
+                }else{
+                        console.log(err);
+                }
+                });
+        });
 	/* Torrent Handler */
 	// GET Upload Page
 	router.get('/upload', isAuthenticated, function(req, res){

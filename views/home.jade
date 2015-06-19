@@ -5,17 +5,16 @@ block content
   div.container
     div
       div
-        h1.text-center.login-title Welcome:
-         div
-          table(class="table")
-           tr
-            th Title:
-            th Uploaded:
-            th Download:
-           each torrents in torrent
-            tr
-             td 
-              a(href='\item=#{torrents.id}') #{torrents.title}
-             td #{torrents.date}
-             td 
-              a(href='#{torrents.file_path}') download 
+       table(class="table")
+        tr
+          th Title:
+          th Uploaded:
+          th Download:
+        each torrents in torrent
+         tr
+           td 
+            a(href='\item=#{torrents.id}') #{torrents.title}
+           td #{torrents.date}
+           td 
+            a(href='#{torrents.file_path}') download 
+  include footer.jade
