@@ -93,10 +93,15 @@ module.exports = function(passport){
 	});
 	/* GET Search */
 	// GET Search
-	router.get('/search', isAuthenticated, function(req, res){
-                Torrent_q.find({}, function (err, searchr) {
+	router.post('/search', isAuthenticated, function(req, res){
+		console.log(req.body.search);
+		var re = new RegExp(req.body.search, 'i'); //see about using req.params.search for get request
+		console.log(re);
+		// TODO: Setup More advanced search query
+                //Torrent_q.find([ { title: { $regex: re }}, { file_name: { $regex: re }} ], function (err, torrent) {
+                Torrent_q.find({ title: { $regex: re }}, function (err, torrent) {
                 if (!err) {
-                        res.render('search', { user: req.user, searchr: searchr });
+                        res.render('search', { user: req.user, torrent: torrent });
                 }else{
                         console.log(err);
                 }
