@@ -20,7 +20,7 @@ module.exports = function(passport){
                     if (user) {
                         console.log('User already exists with username: '+username);
                         return done(null, false, req.flash('message','User Already Exists'));
-                    }else if (req.param('password') != req.param('password_comf')){
+                    }else if (req.body.password != req.body.password_comf){
                         console.log('Password and password_comf did not match');
                         return done(null, false, req.flash('message','Password did not match'));
                         // TODO - add function to test password strength with test case
@@ -33,7 +33,7 @@ module.exports = function(passport){
                         newUser.username = username;
                         // TODO - Add password comf check
                         newUser.password = createHash(password);
-                        newUser.admin = req.param('isAdmin');
+                        newUser.admin = req.body.isAdmin;
 
                         // save the user
                         newUser.save(function(err) {
@@ -58,6 +58,5 @@ module.exports = function(passport){
     var createHash = function(password){
         return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
     }
-    //function(password)
 
 }
