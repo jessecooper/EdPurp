@@ -24,7 +24,7 @@
 <tr>
 	<td>verifyText</td>
 	<td>css=h3</td>
-	<td>Register Change Password:</td>
+	<td>Change Password:</td>
 </tr>
 <tr>
 	<td>type</td>

@@ -59,14 +59,14 @@ module.exports = function(passport){
 	// POST Profile
 	// TODO move password reset code some code to a module
 	router.post('/profile', isAuthenticated, function(req, res){
-		if (req.param('password') != req.param('password_comf')){
+		if (req.body.password != req.body.password_comf){
                         console.log('Password and password_comf did not match');
                         // TODO - add function to test password strength with test case
 			res.render('profile',{user: req.user, message: 'Passwords did not match'});
 		} else {
 			
 			console.log('user: ' + req.user);
-			uPassword_c.update( { username: req.user.username}, {$set: { password: createHash(req.param('password')) }}, { multi: 'false' }, function(err,update) {
+			uPassword_c.update( { username: req.user.username}, {$set: { password: createHash(req.body.password) }}, { multi: 'false' }, function(err,update) {
 				if( err || !update ){
 					res.render('profile',{user: req.user, message: 'Password Change error'});
 					console.log('Error: ' + err + ' ' + update);
