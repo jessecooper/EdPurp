@@ -18,4 +18,4 @@ It is currently not ready for production.
 ## Run Site
 * Dev: sh debug.sh Prod:./bin/www
 * https://localhost:3000/
-* Login: epadmin Password: EpAdmin
+* Login: epadmin Password: EpAdm1n!

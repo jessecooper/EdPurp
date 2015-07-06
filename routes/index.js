@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var uploader = require('../modules/upload')
-//var books = require('../modules/books')
 // Mongoose models
 var uPassword_c = require('../models/user');
 var Torrent_q = require('../models/torrent');
@@ -11,6 +10,7 @@ var util = require('util')
 
 //Needed for password reset
 var bCrypt = require('bcrypt-nodejs');
+var passVal = require('../modules/passwdVal');
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -61,8 +61,10 @@ module.exports = function(passport){
 	router.post('/profile', isAuthenticated, function(req, res){
 		if (req.body.password != req.body.password_comf){
                         console.log('Password and password_comf did not match');
-                        // TODO - add function to test password strength with test case
 			res.render('profile',{user: req.user, message: 'Passwords did not match'});
+		} else if (!passVal(req.body.password)){
+			console.log('Password Validation Failed');
+                        res.render('profile',{user: req.user, message: 'Passwords did not meet password strenght policy'});	
 		} else {
 			
 			console.log('user: ' + req.user);

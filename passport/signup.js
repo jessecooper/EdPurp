@@ -1,5 +1,6 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var User = require('../models/user');
+var passVal = require('../modules/passwdVal.js');
 var bCrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport){
@@ -20,10 +21,12 @@ module.exports = function(passport){
                     if (user) {
                         console.log('User already exists with username: '+username);
                         return done(null, false, req.flash('message','User Already Exists'));
-                    }else if (req.body.password != req.body.password_comf){
+		    }else if (req.body.password != req.body.password_comf){
                         console.log('Password and password_comf did not match');
                         return done(null, false, req.flash('message','Password did not match'));
-                        // TODO - add function to test password strength with test case
+		    }else if (!passVal(password)){
+			console.log('Password Validation Failed');
+                        return done(null, false, req.flash('message','Password did not comply with password policy'));
                     } else {
                         // if there is no user
                         // create the user
@@ -31,7 +34,6 @@ module.exports = function(passport){
 
                         // set the user's local credentials
                         newUser.username = username;
-                        // TODO - Add password comf check
                         newUser.password = createHash(password);
                         newUser.admin = req.body.isAdmin;
 

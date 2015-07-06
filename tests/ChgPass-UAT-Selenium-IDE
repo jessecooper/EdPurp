@@ -49,12 +49,12 @@
 <tr>
 	<td>type</td>
 	<td>name=password</td>
-	<td>PassW0rd</td>
+	<td>PassW0rd!</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=password_comf</td>
-	<td>PassW0rd</td>
+	<td>PassW0rd!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -69,12 +69,12 @@
 <tr>
 	<td>type</td>
 	<td>name=password</td>
-	<td>EpAdmin</td>
+	<td>EpAdm1n!</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=password_comf</td>
-	<td>EpAdmin</td>
+	<td>EpAdm1n!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
