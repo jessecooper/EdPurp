@@ -109,6 +109,16 @@ module.exports = function(passport){
                 }
                 });
         });
+	/* GET file info */
+	router.get('/file_info/:file_id', isAuthenticated, function(req, res){
+                Torrent_q.findOne({ _id: req.params.file_id }, function (err, torrent) {
+                if (!err) {
+                        res.render('file_info', { user: req.user, torrent: torrent });
+                }else{
+                        console.log(err);
+                }
+                });
+	});
 	/* Torrent Handler */
 	// GET Upload Page
 	router.get('/upload', isAuthenticated, function(req, res){

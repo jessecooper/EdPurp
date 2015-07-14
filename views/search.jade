@@ -13,7 +13,7 @@ block content
         each torrents in torrent
          tr
            td 
-            a(href='\item=#{torrents.id}') #{torrents.title}
+            a(href='/file_info/#{torrents.id}') #{torrents.title}
            td #{torrents.date}
            td 
             a(href='#{torrents.file_path}')
