@@ -1,4 +1,3 @@
-//var Book = require('../models/book');
 var Torrent = require('../models/torrent');
 
 var upload = function(req, done){
@@ -8,27 +7,27 @@ var upload = function(req, done){
     // Check special properties
     if (req.body.book == "book")
     {
-    	newTorrent.properties = "{ t_type : " + req.body.book + " }";
-    	newTorrent.properties = "{ isbn : " + req.body.isbn + " }";
+    	newTorrent.type = req.body.book;
+    	newTorrent.properties = JSON.parse('{ "isbn" : ' + req.body.isbn + ' }');
     }
     else if (req.body.movie == "movie")
     {
-    	newTorrent.properties = "{ t_type : " + req.body.movie + " }";
+    	newTorrent.type = req.body.movie;
 	// Place Holder for uniq properties
     }
     else if (req.body.music == "music")
     {
-    	newTorrent.properties = "{ t_type : " + req.body.music + " }";
+    	newTorrent.type = req.body.music;
 	// Place Holder for uniq properties
     }
     else if (req.body.app == "app")
     {
-    	newTorrent.properties = "{ t_type : " + req.body.app + " }";
+    	newTorrent.type = req.body.app;
 	// Place Holder for uniq properties
     }
     else if (req.body.game == "game")
     {
-    	newTorrent.properties = "{ t_type : " + req.body.game + " }";
+    	newTorrent.type = req.body.game;
 	// Place Holder for uniq properties
     }
     newTorrent.description = req.body.description;
@@ -42,10 +41,10 @@ var upload = function(req, done){
     //console.log(req.body.movie);
     //console.log(chunk.torrent[0].name);
     
-    // save the book
+    // save the file
     newTorrent.save(function(err) {
         if (err){
-            console.log('Error in Saving torrent: '+err);  
+            console.log('Error in Saving File: '+err);  
             throw err;  
         }
         console.log('Upload succesful');

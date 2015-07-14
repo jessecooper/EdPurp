@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  include menu.jade
+  div(class='container', style='padding-top: inherit')
+    div.row
+      div.col-xs-9 
+       h2 #{torrent.title}
+      div.col-xs-9 
+       b Action: 
+        a(href='#{torrent.file_path}')
+             span(class="glyphicon glyphicon-download-alt") 
+      // TODO: Setup info with posters pulled from APIs
+      //div.col-xs-4
+      //div.col-xs-9
+        //img(class='img' height='317' width='214' alt='Poster' src='/file/goes/here' onerror='changeImage()')
+      //div.col-xs-6
+      div.col-xs-9 
+        b File: 
+        | #{torrent.file_name}
+      div.col-xs-9
+        b Type: 
+        | #{torrent.type}
+      div.col-xs-9
+        //b Properties:
+         // TODO: See if nested for loop can be changed by changing the torrent schema for properties 
+        each property in torrent.properties
+          //br
+          each v, k in property
+           b #{k.toUpperCase()}: 
+           | #{v}
+      div.col-xs-9 
+       p(style='white-space:pre;')
+        b Description: 
+        | 
+        | #{torrent.description}
+  include footer.jade
