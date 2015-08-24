@@ -4,6 +4,7 @@ var uploader = require('../modules/upload')
 // Mongoose models
 var uPassword_c = require('../models/user');
 var Torrent_q = require('../models/torrent');
+var Users = require('../models/user');
 
 // Inspect objects
 var util = require('util')
@@ -82,6 +83,33 @@ module.exports = function(passport){
                         return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
         }
 
+	/* User Management */
+	//GET User list
+	router.get('/usr_list', isAuthenticated, function(req, res){
+	//router.get('/usr_list', function(req, res){
+                Users.find({}, function (err, users) {
+                if (!err) {
+                        res.json(users);
+                }else{
+                        console.log(err);
+                }
+                });
+        });
+	//DELETE User
+        router.delete('/usr_del/:usr_id', isAuthenticated, function(req, res){
+        //router.delete('/usr_del/:usr_id', function(req, res){
+		console.log(req.params.usr_id);
+                Users.remove({ "_id": req.params.usr_id }, function (err, users) {
+                if (!err) {
+			console.log("User Deleted");
+                        //res.render('register',{user: req.user, message: "user deleted"});
+                }else{
+			console.log("User not found");
+                        //res.render('register',{user: req.user, message: "Err removing user"});
+                }
+                });
+        });
+
 	// GET Home Page 
 	// TODO: Query homepage results
 	router.get('/home', isAuthenticated, function(req, res){
@@ -93,8 +121,8 @@ module.exports = function(passport){
     		}
   		});
 	});
-	/* GET Search */
-	// GET Search
+	/* POST Search */
+	// POST Search
 	router.post('/search', isAuthenticated, function(req, res){
 		console.log(req.body.search);
 		var re = new RegExp(req.body.search, 'i'); //see about using req.params.search for get request
