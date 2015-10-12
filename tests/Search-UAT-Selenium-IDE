@@ -4,52 +4,32 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="https://localhost:3000/" />
-<title>upload_torrent</title>
+<title>Search</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">upload_torrent</td></tr>
+<tr><td rowspan="1" colspan="3">Search</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
 	<td>/home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=upload</td>
-	<td></td>
+	<td>book_ut</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=torrent</td>
-	<td>/home/jcooper/Downloads/CentOS-7.0-1406-x86_64-DVD.torrent</td>
+	<td>name=search</td>
+	<td>book_ut</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=title</td>
-	<td>book_UT</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=isbn</td>
-	<td>number</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=description</td>
-	<td>this is for books</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//button[@type='submit']</td>
-	<td></td>
+	<td>keyPressAndWait</td>
+	<td>name=search</td>
+	<td>\13</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>css=h1.text-center.error-message</td>
-	<td>File Uploaded</td>
+	<td>link=book_UT</td>
+	<td>book_UT</td>
 </tr>
 </tbody></table>
 </body>

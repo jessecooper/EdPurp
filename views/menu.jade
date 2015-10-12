@@ -18,10 +18,10 @@ nav(class="navbar navbar-inverse navbar-fixed-top")
               a(id="admin" href="/signup") Admin
           ul(class="nav navbar-nav navbar-right")
             li
-              form(class="navbar-form navbar-right")
-               input(type="text" class="form-control" placeholder="Search...")
+              form(class="navbar-form navbar-right" action="/search" method="POST")
+               input(type="text" name="search" class="form-control" placeholder="Search...")
             li(class="dropdown")
-              a(id="profile" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{user.username} 
+              a(id="user_dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{user.username} 
                span(class="glyphicon glyphicon-user")
               ul(class="dropdown-menu")
                li

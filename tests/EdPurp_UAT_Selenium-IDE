@@ -11,6 +11,7 @@
 <tr><td><a href="LogIn-UAT-Selenium-IDE">Login</a></td></tr>
 <tr><td><a href="ChgPass-UAT-Selenium-IDE">ChgPass</a></td></tr>
 <tr><td><a href="UploadTorrent-UAT-Selenium-IDE">upload_torrent</a></td></tr>
+<tr><td><a href="Search-UAT-Selenium-IDE">Search</a></td></tr>
 <tr><td><a href="SignOut-UAT-Selenium-IDE">SignOut</a></td></tr>
 </tbody></table>
 </body>

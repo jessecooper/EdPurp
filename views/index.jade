@@ -3,8 +3,7 @@ block content
   div.container
           div
             form(class='form-signin', action='/login', method='POST')
-              img(class='profile-img', src='https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120')
-              //h2.form-signin-heading EdPurp Sign In
+              img(src='./images/Pirate-Flag.png', class='img-circle', alt='flag')
               label(for='username', 'class="sr-only')
               input(type='text', name='username' class='form-control', placeholder='User Name',required, autofocus)
               label(for='password' class='sr-only')
@@ -14,3 +13,4 @@ block content
           #message
           if message
             h1.text-center.error-message #{message}
+  include footer

@@ -22,4 +22,31 @@ block content
              #message
              if message
                 h1.text-center.error-message #{message}
+           div(ng-app="userList" ng-controller="UserCtrl") 
+            table(class="table")
+             tr
+              th Name:
+              th rm:
+             tr(ng-repeat="x in users")
+              td {{ x.username }}
+              td 
+                //a(href="/usr_del/{{ x._id }}")
+                a(ng-click="userDel(x._id)")
+                 span(class="glyphicon glyphicon-remove")
+ // TODO: Move this to an outside file and add the useradd function 
+ script.
+    var app = angular.module('userList', []);
+    app.controller('UserCtrl', function($scope, $http) {
+     $http.get("/usr_list")
+     .then(function(response){ $scope.users = response.data; });
+     // Get Users
+     $scope.userGet = function() {
+       $http.get("/usr_list")
+       .then(function(response){ $scope.users = response.data; });
+     }
+     // Delete User
+     $scope.userDel = function(id) {
+       $http.delete("/usr_del/"+id).then(this.userGet);
+     }
+    });
  include footer.jade
