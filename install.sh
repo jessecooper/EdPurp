@@ -7,7 +7,7 @@
 #Functions
 test_packages()
 {
-	if [[ -f /usr/bin/npm || -f /usr/local/bin/npm ]]
+	if ([ -e /usr/bin/npm ] || [ -f "/usr/local/bin/npm" ])
 	then
 		echo 'NPM ........... Pass'
 	else	
