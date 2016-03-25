@@ -5,9 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 // File Upload 
 var multer  = require('multer');
 
@@ -67,12 +64,28 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 
-
-var routes = require('./routes/index')(passport);
-
-app.use('/', routes);
-app.use('/users', users);
-
+// Setup routes
+// Init routes
+// when adding route it will append the first arg to the one defined in the file
+// i.e. ('app', test) will be /app/... whatever route is defined in the file
+app.use('/', require('./routes/index')(passport));
+app.use(require('./routes/login')(passport));
+app.use(require('./routes/signup')(passport));
+app.use(require('./routes/profile')(passport));
+app.use(require('./routes/usr_list')(passport));
+app.use(require('./routes/usr_del')(passport));
+app.use(require('./routes/home')(passport));
+app.use(require('./routes/search')(passport));
+app.use(require('./routes/file_info')(passport));
+app.use(require('./routes/upload')(passport));
+app.use(require('./routes/signout')(passport));
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Must be the last route for some unknow reason. 
+// This route will be changed so the file goes directly
+// to MongoDB as a blob. This will make the app more
+// Scaleable. 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+app.use('/', require('./routes/download')(passport));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
