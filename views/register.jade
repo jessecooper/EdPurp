@@ -30,8 +30,7 @@ block content
              tr(ng-repeat="x in users")
               td {{ x.username }}
               td 
-                //a(href="/usr_del/{{ x._id }}")
-                a(ng-click="userDel(x._id)")
+                a(ng-click="userDel($index)")
                  span(class="glyphicon glyphicon-remove")
  // TODO: Move this to an outside file and add the useradd function 
  script.
@@ -46,7 +45,11 @@ block content
      }
      // Delete User
      $scope.userDel = function(id) {
-       $http.delete("/usr_del/"+id).then(this.userGet);
+       // Passed $index and created user object from users array
+       // This allowed me to get splice to work and is more secure
+       // because _id is not displayed in the delete link
+       var user = $scope.users[id];
+       $http.delete("/usr_del/"+user._id).then($scope.users.splice(id, 1));
      }
     });
  include footer.jade
